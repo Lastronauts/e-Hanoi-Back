@@ -1,0 +1,27 @@
+query GetUser {
+  getUser {
+    id
+    name
+  }
+}
+
+query ListUser($name: String! $start: Int $range: Int) {
+  listUser(name: $name start: $start range: $range) {
+    id
+    name
+  }
+}
+
+mutation CreateUserOnDb($new_user: NewUser!) {
+  createUserOnDb(newUser: $new_user) {
+    id
+    name
+  }
+}
+
+mutation DeleteUserOnDb {
+  deleteUserOnDb {
+    id
+    name
+  }
+}
