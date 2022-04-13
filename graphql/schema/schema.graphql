@@ -1,0 +1,18 @@
+type Query {
+  getUser: User!
+  listUser(name: String!, start: Int = 0, range: Int = 20): [User!]!
+}
+
+type Mutation {
+  createUserOnDb(newUser: NewUser!): User!
+  deleteUserOnDb: User!
+}
+
+type User {
+  id: ID!
+  name: String!
+}
+
+input NewUser {
+  name: String!
+}
