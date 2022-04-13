@@ -3,7 +3,21 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: "cimg/rust:1.58.1"
+      - image: cimg/rust:1.60.0
+  with_postgres:
+    docker:
+      - image: cimg/rust:1.60.0
+        environment:
+          DATABASE_URL: postgres://circleci@localhost:5432/e-hanoi
+      - image: cimg/postgres:14.2
+        auth:
+          username: $DOCKER_HUB_USERNAME
+          password: $DOCKER_HUB_ACCESS_TOKEN
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_DB: e-hanoi
+          POSTGRES_HOST_AUTH_METHOD: trust
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
 
 jobs:
   lint:
@@ -25,15 +39,20 @@ jobs:
             - "/usr/local/cargo/registry"
             - "target/"
   test:
-    executor: "default"
+    executor: "with_postgres"
     steps:
       - "checkout"
       - restore_cache:
           key: 'v1-cargo-lock-{{ checksum "Cargo.lock"}}'
-      - run: "cargo --version"
+      - run: cargo --version
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client-12
       - run:
-          name: "run tests"
-          command: "cargo test -- --nocapture"
+          name: run migrations
+          command: psql -d $DATABASE_URL -f ../migrations/2022-04-13-154904_users/up.sql"
+      - run:
+          name: run tests
+          command: "cargo test -- --nocapture --test-threads=1"
       - save_cache:
           key: 'v1-cargo-lock-{{ checksum "Cargo.lock"}}'
           paths:
