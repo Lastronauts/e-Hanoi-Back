@@ -49,10 +49,10 @@ jobs:
       - run: sudo apt-get install postgresql-client-12
       - run:
           name: run migrations
-          command: psql -d $DATABASE_URL -f ../migrations/2022-04-13-154904_users/up.sql"
+          command: "psql -d $DATABASE_URL -f ./migrations/2022-04-13-154904_users/up.sql"
       - run:
           name: run tests
-          command: "cargo test -- --nocapture --test-threads=1"
+          command: "cargo test -- --nocapture"
       - save_cache:
           key: 'v1-cargo-lock-{{ checksum "Cargo.lock"}}'
           paths:
