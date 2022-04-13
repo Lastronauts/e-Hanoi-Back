@@ -15,7 +15,7 @@ struct ListUser;
 
 pub async fn list_user(graphql_endpoint: &String) -> Result<()> {
     let input = list_user::Variables {
-        name: String::from("yukarisann-lover"),
+        name: String::from("hoge"),
         start: None,
         range: Some(100),
     };

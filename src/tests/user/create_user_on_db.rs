@@ -18,7 +18,7 @@ struct CreateUserOnDb;
 pub async fn create_user_on_db(graphql_endpoint: &String) -> Result<()> {
     let input = create_user_on_db::Variables {
         new_user: create_user_on_db::NewUser {
-            name: String::from("yukarisann-lover"),
+            name: String::from("hoge"),
         },
     };
     let test_token = get_test_token()?;
