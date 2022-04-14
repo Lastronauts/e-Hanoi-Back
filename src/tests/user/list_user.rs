@@ -13,7 +13,7 @@ use reqwest::Client;
 )]
 struct ListUser;
 
-pub async fn list_user(graphql_endpoint: &String) -> Result<()> {
+pub async fn list_user(graphql_endpoint: &str) -> Result<()> {
     let input = list_user::Variables {
         name: String::from("hoge"),
         start: None,

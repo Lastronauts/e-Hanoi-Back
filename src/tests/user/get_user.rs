@@ -1,4 +1,3 @@
-use super::get_test_token;
 use actix_web::http::header;
 use anyhow::Result;
 use graphql_client::{
@@ -15,15 +14,13 @@ use reqwest::Client;
 )]
 struct GetUser;
 
-pub async fn get_user(graphql_endpoint: &String) -> Result<()> {
-    let test_token = get_test_token()?;
-
+pub async fn get_user(graphql_endpoint: &str, token: &str) -> Result<()> {
     let client = Client::new();
     let req_body = GetUser::build_query(get_user::Variables {});
 
     let res = client
         .post(graphql_endpoint)
-        .header(header::AUTHORIZATION, test_token)
+        .header(header::AUTHORIZATION, token)
         .json(&req_body)
         .send()
         .await?;
