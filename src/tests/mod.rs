@@ -1,9 +1,13 @@
-use crate::*;
+use crate::main;
 use anyhow::Result;
 use dotenv::dotenv;
-use std::thread;
+use std::{
+    env,
+    thread,
+};
 
 mod user;
+use user::get_test_token;
 
 #[actix_rt::test]
 async fn main_test() -> Result<()> {
@@ -29,10 +33,12 @@ async fn main_test() -> Result<()> {
 
     std::thread::sleep(std::time::Duration::from_secs(5));
 
-    user::get_user(&graphql_endpoint).await?;
+    let test_token = get_test_token()?;
+
+    user::get_user(&graphql_endpoint, &test_token).await?;
     user::list_user(&graphql_endpoint).await?;
-    user::create_user_on_db(&graphql_endpoint).await?;
-    user::delete_user_on_db(&graphql_endpoint).await?;
+    user::create_user_in_db(&graphql_endpoint, &test_token).await?;
+    user::delete_user_in_db(&graphql_endpoint, &test_token).await?;
 
     print!("\n\n");
 
