@@ -12,15 +12,15 @@ query ListUser($name: String! $start: Int $range: Int) {
   }
 }
 
-mutation CreateUserOnDb($new_user: NewUser!) {
-  createUserOnDB(newUser: $new_user) {
+mutation CreateUserInDb($new_user: NewUser!) {
+  createUserInDB(newUser: $new_user) {
     id
     name
   }
 }
 
-mutation DeleteUserOnDb {
-  deleteUserOnDB {
+mutation DeleteUserInDb {
+  deleteUserInDB {
     id
     name
   }

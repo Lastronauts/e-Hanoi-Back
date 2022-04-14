@@ -4,8 +4,8 @@ type Query {
 }
 
 type Mutation {
-  createUserOnDB(newUser: NewUser!): User!
-  deleteUserOnDB: User!
+  createUserInDB(newUser: NewUser!): User!
+  deleteUserInDB: User!
 }
 
 type User {

@@ -1,4 +1,3 @@
-use super::get_test_token;
 use actix_web::http::header;
 use anyhow::Result;
 use graphql_client::{
@@ -13,21 +12,25 @@ use reqwest::Client;
     query_path = "src/tests/user/query.graphql",
     response_derives = "Debug",
 )]
-struct DeleteUserOnDb;
+struct CreateUserInDb;
 
-pub async fn delete_user_on_db(graphql_endpoint: &String) -> Result<()> {
-    let test_token = get_test_token()?;
+pub async fn create_user_in_db(graphql_endpoint: &str, token: &str) -> Result<()> {
+    let input = create_user_in_db::Variables {
+        new_user: create_user_in_db::NewUser {
+            name: String::from("hoge"),
+        },
+    };
 
     let client = Client::new();
-    let req_body = DeleteUserOnDb::build_query(delete_user_on_db::Variables {});
+    let req_body = CreateUserInDb::build_query(input);
 
     let res = client
         .post(graphql_endpoint)
-        .header(header::AUTHORIZATION, test_token)
+        .header(header::AUTHORIZATION, token)
         .json(&req_body)
         .send()
         .await?;
-    let res_body: Response<delete_user_on_db::ResponseData> = res.json().await?;
+    let res_body: Response<create_user_in_db::ResponseData> = res.json().await?;
     println!("{:#?}", res_body);
 
     Ok(())
