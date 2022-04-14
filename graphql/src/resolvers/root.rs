@@ -48,7 +48,7 @@ impl Query {
 
 #[graphql_object(context = Context)]
 impl Mutation {
-    #[graphql(name = "createUserOnDB")]
+    #[graphql(name = "createUserInDB")]
     fn create_user_on_db(context: &Context, new_user: NewUser) -> FieldResult<User> {
         let session = new_session(&context.credentials, context.token.clone())?;
         let created_user = users::Repository::insert(&context.pool, new_user.into_form(&session))?;
@@ -56,7 +56,7 @@ impl Mutation {
         Ok(created_user.into())
     }
 
-    #[graphql(name = "deleteUserOnDB")]
+    #[graphql(name = "deleteUserInDB")]
     fn delete_user_on_db(context: &Context) -> FieldResult<User> {
         let session = new_session(&context.credentials, context.token.clone())?;
         let deleted_user = users::Repository::delete(&context.pool, &session.user_id)?;
