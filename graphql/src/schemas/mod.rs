@@ -14,6 +14,7 @@ use root::{
     Query,
     Schema,
 };
+pub mod score;
 pub mod user;
 
 pub struct Context {
