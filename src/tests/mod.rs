@@ -8,6 +8,7 @@ use std::{
 
 mod user;
 use user::get_test_token;
+mod score;
 
 #[actix_rt::test]
 async fn main_test() -> Result<()> {
@@ -35,9 +36,13 @@ async fn main_test() -> Result<()> {
 
     let test_token = get_test_token()?;
 
+    user::create_user_in_db(&graphql_endpoint, &test_token).await?;
     user::get_user(&graphql_endpoint, &test_token).await?;
     user::list_user(&graphql_endpoint).await?;
-    user::create_user_in_db(&graphql_endpoint, &test_token).await?;
+    score::create_score(&graphql_endpoint, &test_token).await?;
+    score::get_my_best_score(&graphql_endpoint, &test_token).await?;
+    score::ranking_score(&graphql_endpoint).await?;
+    score::delete_score(&graphql_endpoint, &test_token).await?;
     user::delete_user_in_db(&graphql_endpoint, &test_token).await?;
 
     print!("\n\n");
