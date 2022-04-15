@@ -1,5 +1,6 @@
 use crate::db::{
     schema::users::dsl::*,
+    scores,
     users::{
         User,
         UserNewForm,
@@ -70,6 +71,8 @@ impl Repository {
 
     pub fn delete(pool: &Data<PgPool>, key_id: &str) -> Result<User> {
         let connection = pool.get()?;
+
+        scores::Repository::delete_by_user_id(pool, key_id)?;
         let query = delete(users.find(key_id));
 
         let sql = debug_query::<Pg, _>(&query).to_string();
