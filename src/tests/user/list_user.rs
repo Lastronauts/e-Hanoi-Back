@@ -9,7 +9,7 @@ use reqwest::Client;
 #[graphql(
     schema_path = "graphql/schema/schema.graphql",
     query_path = "src/tests/user/query.graphql",
-    response_derives = "Debug",
+    response_derives = "Debug"
 )]
 struct ListUser;
 
