@@ -26,11 +26,13 @@ pub fn get_test_token() -> Result<String> {
     )?;
     let service_session = Session::new(credentials.clone())?;
 
-    let session = users::sign_in(&service_session, "hoge@hoge.com", "hogehoge")?;
-
+    let session = users::sign_in(&service_session, "cargo_test@cargo_test.com", "cargo_test")?;
     let token = session.access_token();
+    println!("user cargo_test's token is refreshed: {}", token);
 
-    println!("test token: {}", token);
+    let session = users::sign_in(&service_session, "playground@playground.com", "playground")?;
+    let token = session.access_token();
+    println!("user playground's token is refreshed: {}", token);
 
     Ok(token)
 }
