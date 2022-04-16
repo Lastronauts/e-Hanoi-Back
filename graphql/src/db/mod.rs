@@ -18,8 +18,8 @@ use users::loader::{
 };
 pub mod scores;
 use scores::loader::{
-    create_scores_loader,
-    ScoresLoader,
+    create_user_scores_loader,
+    UserScoresLoader,
 };
 
 pub type PgPool = Pool<ConnectionManager<PgConnection>>;
@@ -37,14 +37,14 @@ pub fn new_pool() -> Result<PgPool> {
 
 pub struct Loaders {
     pub users: UsersLoader,
-    pub scores: ScoresLoader,
+    pub user_scores: UserScoresLoader,
 }
 
 impl Loaders {
     pub fn new(pool: &Data<PgPool>) -> Self {
         Self {
             users: create_users_loader(pool),
-            scores: create_scores_loader(pool),
+            user_scores: create_user_scores_loader(pool),
         }
     }
 }
