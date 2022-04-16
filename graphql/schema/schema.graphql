@@ -15,6 +15,7 @@ type Mutation {
 type User {
   id: ID!
   name: String!
+  scores: [Score!]!
 }
 
 input NewUser {
@@ -26,8 +27,9 @@ type Score {
   userID: String!
   clearTime: Int!
   createdAt: Int!
+  user: User!
 }
 
-input NewScore{
+input NewScore {
   clearTime: Int!
 }
