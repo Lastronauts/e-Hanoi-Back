@@ -12,11 +12,11 @@ use reqwest::Client;
     query_path = "src/tests/user/query.graphql",
     response_derives = "Debug"
 )]
-struct DeleteUserInDb;
+struct DeleteUserInDB;
 
 pub async fn delete_user_in_db(graphql_endpoint: &str, token: &str) -> Result<()> {
     let client = Client::new();
-    let req_body = DeleteUserInDb::build_query(delete_user_in_db::Variables {});
+    let req_body = DeleteUserInDB::build_query(delete_user_in_db::Variables {});
 
     let res = client
         .post(graphql_endpoint)

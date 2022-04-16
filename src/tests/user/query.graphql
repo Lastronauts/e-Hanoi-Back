@@ -2,26 +2,58 @@ query GetUser {
   getUser {
     id
     name
+    scores {
+      id
+      userID
+      user {
+        id
+        name
+      }
+    }
   }
 }
 
-query ListUser($name: String! $start: Int $range: Int) {
-  listUser(name: $name start: $start range: $range) {
+query ListUser($name: String!, $start: Int, $range: Int) {
+  listUser(name: $name, start: $start, range: $range) {
     id
     name
+    scores {
+      id
+      userID
+      user {
+        id
+        name
+      }
+    }
   }
 }
 
-mutation CreateUserInDb($new_user: NewUser!) {
-  createUserInDB(newUser: $new_user) {
+mutation CreateUserInDB($newUser: NewUser!) {
+  createUserInDB(newUser: $newUser) {
     id
     name
+    scores {
+      id
+      userID
+      user {
+        id
+        name
+      }
+    }
   }
 }
 
-mutation DeleteUserInDb {
+mutation DeleteUserInDB {
   deleteUserInDB {
     id
     name
+    scores {
+      id
+      userID
+      user {
+        id
+        name
+      }
+    }
   }
 }

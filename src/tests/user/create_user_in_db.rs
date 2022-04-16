@@ -12,7 +12,7 @@ use reqwest::Client;
     query_path = "src/tests/user/query.graphql",
     response_derives = "Debug"
 )]
-struct CreateUserInDb;
+struct CreateUserInDB;
 
 pub async fn create_user_in_db(graphql_endpoint: &str, token: &str) -> Result<()> {
     let input = create_user_in_db::Variables {
@@ -22,7 +22,7 @@ pub async fn create_user_in_db(graphql_endpoint: &str, token: &str) -> Result<()
     };
 
     let client = Client::new();
-    let req_body = CreateUserInDb::build_query(input);
+    let req_body = CreateUserInDB::build_query(input);
 
     let res = client
         .post(graphql_endpoint)

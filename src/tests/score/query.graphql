@@ -4,6 +4,14 @@ query GetMyBestScore {
     userID
     clearTime
     createdAt
+    user {
+      id
+      name
+      scores {
+        id
+        userID
+      }
+    }
   }
 }
 
@@ -13,6 +21,14 @@ query RankingScore {
     userID
     clearTime
     createdAt
+    user {
+      id
+      name
+      scores {
+        id
+        userID
+      }
+    }
   }
 }
 
@@ -22,6 +38,14 @@ mutation CreateScore($newScore: NewScore!) {
     userID
     clearTime
     createdAt
+    user {
+      id
+      name
+      scores {
+        id
+        userID
+      }
+    }
   }
 }
 
@@ -31,5 +55,13 @@ mutation DeleteScore($id: Int!) {
     userID
     clearTime
     createdAt
+    user {
+      id
+      name
+      scores {
+        id
+        userID
+      }
+    }
   }
 }
