@@ -1,5 +1,6 @@
 use crate::schemas::{
     score::Score,
+    user::User,
     Context,
 };
 use juniper::{
@@ -26,5 +27,14 @@ impl Score {
 
     fn created_at(&self) -> FieldResult<i32> {
         self.created_at.try_into().map_err(FieldError::from)
+    }
+
+    pub async fn user(&self, context: &Context) -> FieldResult<User> {
+        Ok(context
+            .loaders
+            .users
+            .load(self.user_id.clone())
+            .await
+            .into())
     }
 }
