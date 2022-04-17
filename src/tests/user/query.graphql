@@ -1,0 +1,59 @@
+query GetUser {
+  getUser {
+    id
+    name
+    scores {
+      id
+      userID
+      user {
+        id
+        name
+      }
+    }
+  }
+}
+
+query ListUser($name: String!, $start: Int, $range: Int) {
+  listUser(name: $name, start: $start, range: $range) {
+    id
+    name
+    scores {
+      id
+      userID
+      user {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation CreateUserInDB($newUser: NewUser!) {
+  createUserInDB(newUser: $newUser) {
+    id
+    name
+    scores {
+      id
+      userID
+      user {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation DeleteUserInDB {
+  deleteUserInDB {
+    id
+    name
+    scores {
+      id
+      userID
+      user {
+        id
+        name
+      }
+    }
+  }
+}

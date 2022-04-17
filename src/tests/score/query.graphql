@@ -1,0 +1,67 @@
+query GetMyBestScore {
+  getMyBestScore {
+    id
+    userID
+    clearTime
+    createdAt
+    user {
+      id
+      name
+      scores {
+        id
+        userID
+      }
+    }
+  }
+}
+
+query RankingScore {
+  rankingScore {
+    id
+    userID
+    clearTime
+    createdAt
+    user {
+      id
+      name
+      scores {
+        id
+        userID
+      }
+    }
+  }
+}
+
+mutation CreateScore($newScore: NewScore!) {
+  createScore(newScore: $newScore) {
+    id
+    userID
+    clearTime
+    createdAt
+    user {
+      id
+      name
+      scores {
+        id
+        userID
+      }
+    }
+  }
+}
+
+mutation DeleteScore($id: Int!) {
+  deleteScore(id: $id) {
+    id
+    userID
+    clearTime
+    createdAt
+    user {
+      id
+      name
+      scores {
+        id
+        userID
+      }
+    }
+  }
+}
