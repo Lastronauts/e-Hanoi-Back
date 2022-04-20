@@ -1,1 +1,1 @@
-web: ./target/release/e-hanoi-back
+web: ./target/release/e-hanoi-back.exe
